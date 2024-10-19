@@ -12,47 +12,45 @@ st.set_page_config(
     page_icon="🍫",
     layout="wide",
     initial_sidebar_state="expanded")
-
+st.markdown(" <style> div[class^='st-emotion-cache-1gwvy71'] { padding: 0rem; } </style> ", unsafe_allow_html=True)
 alt.themes.enable("dark")
+st.sidebar.container(height=100).markdown("<h1>MESS - Wastage Predictor</h1>", unsafe_allow_html=True)
+st.markdown('''
+        <style>
+        .fullHeight {
+            height: 85vh;
+            width: 95%;
+            padding: 0;
+        }
+        </style>''', unsafe_allow_html=True)
+    
+#     container = st.container()
+#     container.markdown("<div scr='linke', class = 'fullHeight'></div>", unsafe_allow_html = True)
+    # st.title('🍫 MESS - Wastage Predictor",')
+    # sac.segmented(
+    #     items=[
+    #         sac.SegmentedItem(label='A Mess'),
+    #         sac.SegmentedItem(label ='C Mess'),
+    #         sac.SegmentedItem(label='D Mess'),
+    #     ], label='Select Mess', align='center', divider= False
+    # )
+    # sac.buttons([
+    # sac.ButtonsItem(label='button'),
+    # sac.ButtonsItem(icon='apple'),
+    # sac.ButtonsItem(label='google', icon='google'),
+    # sac.ButtonsItem(label='wechat', icon='wechat'),
+    # # Add custom CSS to make the sidebar height 100% of the screen height
 
-with st.sidebar:
-    st.title('🍫 MESS - Wastage Predictor",')
-    
-    sac.segmented(
-        items=[
-            sac.SegmentedItem(label='A Mess'),
-            sac.SegmentedItem(label ='C Mess'),
-            sac.SegmentedItem(label='D Mess'),
-        ], label='Select Mess', align='center', divider= False
-    )
-    
-    sac.buttons([
-    sac.ButtonsItem(label='button'),
-    sac.ButtonsItem(icon='apple'),
-    sac.ButtonsItem(label='google', icon='google'),
-    sac.ButtonsItem(label='wechat', icon='wechat'),
-    
-    sac.ButtonsItem(label='link', icon='share-fill', href='https://ant.design/components/button'),]
-    , label='Others', align='center')
+    # sac.ButtonsItem(label='link', icon='share-fill', href='https://ant.design/components/button'),]
+    # , label='Others', align='center')
 
-    # sac.menu([
-    #     sac.MenuItem('profile', icon='house-fill', children=[
-    #         sac.MenuItem('Name', disabled=True),
-    #         sac.MenuItem('Email', disabled= True),
-    #         sac.MenuItem('Log Out'),
-    #     ]),
-    # ], open_all=True)
-   
-    sac.segmented(
-        items=[
-            sac.SegmentedItem(label='Name',disabled=True),
-            sac.SegmentedItem(label='Email',disabled=True),
-            sac.SegmentedItem(label='Logout'),
-        ],align='center', divider= False
-    )
+    # st.markdown("---")
+    # st.write("Name: John Doe")
+    # st.write("Email: john.doe@example.com")
+    # sac.buttons([
+    #     sac.ButtonsItem(icon='power', label='Log Out')
+    # ], align='center')
  
-
-
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
     heatmap = alt.Chart(input_df).mark_rect().encode(
             y=alt.Y(f'{input_y}:O', axis=alt.Axis(title="Year", titleFontSize=18, titlePadding=15, titleFontWeight=900, labelAngle=0)),
@@ -137,21 +135,31 @@ def format_number(num):
 
 col = st.columns((1.5, 4.5, 2), gap='medium')
 
-
-  
-        
 with col[1]:
-    
     st.markdown('#### BITS Goa')
-    st.image(f'/Users/pray/Documents/Zephyr/Waste_Predictor/map.png')
+    st.image(f'map.png')
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
-    
     st.markdown('#### Graph') 
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
     st.line_chart(chart_data)
-    
-    
-
+    with st.container():
+        st.markdown("### Expected Footfall")
+        migrations_col = st.columns(3)
+        with migrations_col[0]:
+            Expected_footfall_B = 62
+            donut_chart_Expected_footfall_b = make_donut(Expected_footfall_B, 'Expected Footfall', 'green')
+            st.write('Breakfast')
+            st.altair_chart(donut_chart_Expected_footfall_b)
+        with migrations_col[1]:
+            Expected_footfall_L = 80
+            donut_chart_Expected_footfall_l = make_donut(Expected_footfall_L, 'Expected Footfall', 'green')
+            st.write('Lunch')
+            st.altair_chart(donut_chart_Expected_footfall_l)
+        with migrations_col[2]:
+            Expected_footfall_D = 90
+            donut_chart_Expected_footfall_d = make_donut(Expected_footfall_D, 'Expected Footfall', 'green')
+            st.write('Dinner')
+            st.altair_chart(donut_chart_Expected_footfall_d)
     # heatmap = make_heatmap(df_reshaped, 'year', 'states', 'population', selected_color_theme)
     # st.altair_chart(heatmap, use_container_width=True)
 
